@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         forwardInput = Input.GetAxis("Vertical");
 
-        //move indicator
+        // move indicator
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.4f, 0);
     }
 
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") && hasPowerUp)
         {
-            Debug.Log("Player hit " + collision.gameObject.name + "with powerup set to " + hasPowerUp);
+            Debug.Log("Player hit " + collision.gameObject.name + " with powerup set to " + hasPowerUp);
 
             // get local ref to enemyRB
             Rigidbody enemyRB = collision.gameObject.GetComponent<Rigidbody>();
