@@ -6,6 +6,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public bool hasPowerUp;
     private float powerupStrength = 15.0f;
     public GameObject powerupIndicator;
+
+    public Text loseText;
 
     void Start()
     {
@@ -30,6 +34,15 @@ public class PlayerController : MonoBehaviour
 
         // move indicator
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.4f, 0);
+
+        if (gameObject.transform.position.y < -2)
+        {
+            loseText.gameObject.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
     }
 
     private void FixedUpdate()

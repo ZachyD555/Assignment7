@@ -1,11 +1,13 @@
 ﻿/*
  * Zach Daly
  * Assignment 7
- * Controls enemy spawning
+ * Controls enemy spawning, and displays wave number
  */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -15,10 +17,13 @@ public class SpawnManager : MonoBehaviour
     public int enemyCount;
     public int waveNumber = 1;
 
+    public Text winText;
+    public Text waveText;
+
     void Start()
     {
         SpawnEnemyWave(waveNumber);
-        SpawnPowerup(1);
+        SpawnPowerup(2);
     }
 
     private void SpawnEnemyWave(int enemiesToSpawn)
@@ -34,7 +39,7 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < powerupsToSpawn; i++)
         {
-            // Instantiate enemy in random position
+            // Instantiate powerup in random position
             Instantiate(powerupPrefab, GenerateSpawnPos(), powerupPrefab.transform.rotation);
         }
     }
@@ -57,6 +62,17 @@ public class SpawnManager : MonoBehaviour
             waveNumber++;
             SpawnEnemyWave(waveNumber);
             SpawnPowerup(1);
+        }
+        waveText.text = "Wave " + waveNumber + " of 10!";
+
+        if (waveNumber > 10)
+        {
+            Time.timeScale = 0;
+            winText.gameObject.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
 }
