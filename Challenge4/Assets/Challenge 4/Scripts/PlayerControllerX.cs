@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+ * Zach Daly
+ * Challenge 4
+ * Controls player movement and actions
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

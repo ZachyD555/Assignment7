@@ -63,10 +63,12 @@ public class SpawnManager : MonoBehaviour
             SpawnEnemyWave(waveNumber);
             SpawnPowerup(1);
         }
+
         waveText.text = "Wave " + waveNumber + " of 10!";
 
         if (waveNumber > 10)
         {
+            waveText.text = "Wave 10 of 10!";
             Time.timeScale = 0;
             winText.gameObject.SetActive(true);
             if (Input.GetKeyDown(KeyCode.R))

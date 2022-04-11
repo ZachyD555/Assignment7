@@ -1,7 +1,13 @@
-﻿using System.Collections;
+﻿/*
+ * Zach Daly
+ * Challenge 4
+ * Manages spawning of enemies and powerups
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SpawnManagerX : MonoBehaviour
 {
@@ -20,7 +26,6 @@ public class SpawnManagerX : MonoBehaviour
 
     public Text winText;
     public Text waveText;
-    public Text loseText;
 
     // Update is called once per frame
     void Update()
@@ -30,6 +35,19 @@ public class SpawnManagerX : MonoBehaviour
         if (enemyCount == 0)
         {
             SpawnEnemyWave(waveCount);
+        }
+
+        waveText.text = "Wave " + waveCount + " of 10!";
+
+        if (waveCount > 10)
+        {
+            waveText.text = "Wave 10 of 10!";
+            Time.timeScale = 0;
+            winText.gameObject.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
 
